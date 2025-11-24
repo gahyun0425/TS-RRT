@@ -1,0 +1,111 @@
+<!-- <mujocoinclude>
+  <body name="sink_counter" childclass="counters"> -->
+
+    <!-- ===== VISUAL: Faucet & pipes (keep only unique parts) ===== -->
+    <!-- <geom mesh="faucet" pos="-0.4268 -0.3876 0.9588" group="1"/>
+    <geom pos="-0.430  -0.182 1.214" size="0.028 0.040" type="cylinder" group="1"/>
+    <geom pos="-0.430  -0.182 1.286" size="0.020 0.064" type="capsule"  group="1"/>
+    <geom euler="1.57 0 0" pos="-0.430 -0.090 1.350" size="0.020 0.088" type="capsule" group="1"/>
+    <geom pos="-0.430   0.004 1.190" size="0.020 0.160" type="capsule"  group="1"/>
+    <geom pos="-0.430   0.004 1.086" size="0.026 0.056" type="cylinder" group="1"/>
+    <geom pos="-0.392   0.004 1.094" euler="0 1.57 0" size="0.023 0.024" type="cylinder" group="1"/>
+    <geom pos="-0.358   0.004 1.094" euler="0 1.57 0" size="0.028 0.010" type="cylinder" group="1"/>
+    <geom euler="1.57 0 0" pos="-0.358 -0.042 1.094" size="0.008 0.024" type="capsule" group="1"/> -->
+
+    <!-- ===== VISUAL: Aux parts that don't duplicate the simple box_counter ===== -->
+    <!-- <geom type="box" group="1" pos="-0.4244 -0.286 0.318" size="0.2432 0.4848 0.568" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.2228 -0.286 1.010" size="0.0408 0.4888 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.6308 -0.286 1.010" size="0.0408 0.4888 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268  0.070 1.010" size="0.1632 0.132 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268 -0.738 1.010" size="0.1632 0.0312 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.2236 -0.282 0.926" size="0.040 0.488 0.0608" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.6284 -0.282 0.926" size="0.040 0.488 0.0608" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268  0.071 0.926" size="0.1632 0.1328 0.0608" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268 -0.738 0.926" size="0.1648 0.0272 0.0608" material="counter_black"/> -->
+
+    <!-- ===== COLLISION: keep only non-duplicated parts (no cabinet/top here) ===== -->
+    <!-- Pipes -->
+    <!-- <geom class="counter_collision" type="cylinder" pos="-0.430  -0.182 1.214" size="0.028 0.040"  mass=".02"/>
+    <geom class="counter_collision" type="capsule"  pos="-0.430  -0.182 1.286" size="0.020 0.064"  mass=".02"/>
+    <geom class="counter_collision" type="capsule"  euler="1.57 0 0" pos="-0.430 -0.090 1.350" size="0.020 0.088" mass=".02"/>
+    <geom class="counter_collision" type="capsule"  pos="-0.430   0.004 1.190" size="0.020 0.160"  mass=".02"/>
+    <geom class="counter_collision" type="cylinder" pos="-0.430   0.004 1.086" size="0.026 0.056"  mass=".02"/>
+    <geom class="counter_collision" type="cylinder" pos="-0.392   0.004 1.094" euler="0 1.57 0" size="0.023 0.024" mass=".02"/>
+    <geom class="counter_collision" type="cylinder" pos="-0.358   0.004 1.094" euler="0 1.57 0" size="0.028 0.010" mass=".02"/>
+    <geom class="counter_collision" type="capsule"  euler="1.57 0 0" pos="-0.358 -0.042 1.094" size="0.008 0.024" mass=".02"/> -->
+
+    <!-- Aux box collisions (surrounding panels/shelves) -->
+    <!-- <geom class="counter_collision" type="box" pos="-0.4244 -0.286 0.318" size="0.2432 0.4848 0.568" mass="3"/>
+    <geom class="counter_collision" type="box" pos="-0.2228 -0.286 1.014" size="0.0408 0.4888 0.024" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.6308 -0.286 1.014" size="0.0408 0.4888 0.024" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268  0.070 1.014" size="0.1632 0.132 0.024"  mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268 -0.738 1.014" size="0.1632 0.0312 0.024" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.2236 -0.282 0.930" size="0.040 0.488 0.0608"  mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.6284 -0.282 0.930" size="0.040 0.488 0.0608"  mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268  0.071 0.930" size="0.1632 0.1328 0.0608" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268 -0.738 0.930" size="0.1648 0.0272 0.0608" mass=".2"/> -->
+
+    <!-- Bottom posts -->
+    <!-- <geom class="counter_collision" type="cylinder" euler="0 1.57 0" pos="-0.4328 -0.806 0.862" size="0.0176 0.224" mass=".1"/>
+    <geom class="counter_collision" type="cylinder" euler="1.57 0 0" pos="-0.592  -0.782 0.862" size="0.0144 0.024" mass=".02"/>
+    <geom class="counter_collision" type="cylinder" euler="1.57 0 0" pos="-0.2736 -0.782 0.862" size="0.0144 0.024" mass=".02"/>
+    <geom class="counter_collision" type="cylinder" euler="0 1.57 0" pos="-0.4328 -0.806 0.662" size="0.0176 0.224" mass=".1"/>
+    <geom class="counter_collision" type="cylinder" euler="1.57 0 0" pos="-0.592  -0.782 0.662" size="0.0144 0.024" mass=".02"/>
+    <geom class="counter_collision" type="cylinder" euler="1.57 0 0" pos="-0.2736 -0.782 0.662" size="0.0144 0.024" mass=".02"/> -->
+
+  <!-- </body>
+</mujocoinclude> -->
+
+<mujocoinclude>
+  <!-- sink_counter (cabinet/top removed to avoid overlap with box_counter) -->
+  <body name="sink_counter" childclass="counters">
+
+    <!-- ===== VISUAL: Aux parts that don't duplicate the simple box_counter ===== -->
+    <!-- 메인 캐비닛 박스: x,y half-size 각각 0.05 줄임 (가로·세로 10cm 감소) -->
+    <geom type="box" group="1" pos="-0.4244 -0.286 0.318"
+          size="0.1932 0.31 0.568" material="counter_black"/>
+
+    <!-- 얇은 패널/선반들은 half-size가 0.05 미만이라 유지 -->
+    <geom type="box" group="1" pos="-0.23 -0.37 1.010" size="0.035 0.4 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.615 -0.37 1.010" size="0.025 0.4 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268  0.0 1.010" size="0.1632 0.0272 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268 -0.738 1.010" size="0.1632 0.0272 0.024" material="counter_black"/>
+    
+    <geom type="box" group="1" pos="-0.23 -0.37 0.926" size="0.035 0.4 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.615 -0.37 0.926" size="0.025 0.4 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268  0.0 0.926" size="0.1632 0.0272 0.024" material="counter_black"/>
+    <geom type="box" group="1" pos="-0.4268 -0.738 0.926" size="0.1632 0.0272 0.024" material="counter_black"/>
+
+    <!-- ===== COLLISION: keep only non-duplicated parts (no cabinet/top here) ===== -->
+    <!-- 메인 캐비닛 충돌 박스도 동일하게 축소 -->
+    <geom class="counter_collision" type="box" pos="-0.4244 -0.286 0.318"
+          size="0.1932 0.31 0.568" mass="3"/>
+
+    <!-- 나머지 충돌 박스는 유지 -->
+    <geom class="counter_collision" type="box" pos="-0.23 -0.37 1.010" size="0.035 0.4 0.024" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.615 -0.37 1.010" size="0.025 0.4 0.024" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268  0.0 1.010" size="0.1632 0.0272 0.024"  mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268 -0.738 1.010" size="0.1632 0.0272 0.024" mass=".2"/>
+
+    <geom class="counter_collision" type="box" pos="-0.23 -0.37 0.926" size="0.035 0.4 0.024"  mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.615 -0.37 0.926" size="0.025 0.4 0.024"  mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268  0.0 0.926" size="0.1632 0.0272 0.024" mass=".2"/>
+    <geom class="counter_collision" type="box" pos="-0.4268 -0.738 0.926" size="0.1632 0.0272 0.024" mass=".2"/>
+    
+    <geom pos="-0.32  -0.1 1.27" size="0.026 0.020" type="cylinder" group="1"/> <!-- 마지막 원통 -->
+    <geom pos="-0.32  -0.1 1.3205" size="0.020 0.03" type="capsule"  group="1"/> <!-- 마지막 캡슐 -->
+
+    <geom euler="1.57 1.57 0" pos="-0.27 -0.1 1.350" size="0.020 0.044" type="capsule" group="1"/> <!-- 중간 캡슐 -->
+
+    <geom pos="-0.22   -0.1 1.190" size="0.020 0.160" type="capsule"  group="1"/> <!-- 처음 캡슐 -->
+    <geom pos="-0.22   -0.1 1.086" size="0.026 0.056" type="cylinder" group="1"/> <!-- 처음 원통 -->
+
+    <geom pos="-0.22   -0.114 1.094" euler="1.57 0 0" size="0.023 0.024" type="cylinder" group="1"/>
+    <geom pos="-0.22  -0.144 1.094" euler="1.57 0 0" size="0.028 0.010" type="cylinder" group="1"/>
+    
+    <geom euler="0 1.57 0" pos="-0.25 -0.15 1.094" size="0.008 0.024" type="capsule" group="1"/>
+
+
+  </body>
+</mujocoinclude>
+

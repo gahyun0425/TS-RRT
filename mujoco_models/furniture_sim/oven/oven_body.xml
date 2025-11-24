@@ -1,0 +1,132 @@
+<mujocoinclude>
+    <!-- light 위치도 1/2 -->
+    <light class="oven" name="ovenlighta" pos="0 0.1 1.25" dir="0 -.02 -.1" attenuation="0.05 0.05 0.05" cutoff="75" diffuse=".7 .65 .65" specular=".3 .3 .3"/>
+
+    <body name="ovenroot" childclass="oven" pos="0.0575 -0.14605 0.4917">
+        <geom material="oven_black" mesh="burnerplate" pos="-0.12 -0.0595 0.3145"/>
+        <geom material="oven_black" mesh="burnerplate" pos="-0.1185 0.161 0.3145"/>
+        <geom material="oven_black" mesh="burnerplate" pos="0.102 0.161 0.3145"/>
+        <geom material="oven_black" mesh="burnerplate" pos="0.103 -0.0595 0.3145"/>
+
+        <geom material="oven_black" euler="1.57 0 0" pos="-0.1075 -0.18 -0.341" size="0.009 0.015" type="cylinder"/>
+        <geom material="oven_black" euler="1.57 0 0" pos="0.092 -0.18 -0.341"  size="0.009 0.015" type="cylinder"/>
+        <geom material="oven_black" euler="0 1.57 0" pos="-0.0075 -0.195 -0.341" size="0.011 0.14" type="cylinder"/>
+
+        <geom material="oven_black" euler="1.57 0 0" pos="-0.1075 -0.18 0.127" size="0.009 0.015" type="cylinder"/>
+        <geom material="oven_black" euler="1.57 0 0" pos="0.092 -0.18 0.127"  size="0.009 0.015" type="cylinder"/>
+        <geom material="oven_black" euler="0 1.57 0" pos="-0.0075 -0.195 0.127" size="0.011 0.14" type="cylinder"/>
+
+        <geom material="oven_black" mesh="oventop"      pos="-0.0085 0.1375 0.3035"/>
+        <geom material="oven_black" mesh="ovenwindow"   pos="0.48965 0.14605 -0.59385"/>
+
+        <geom material="oven_black" pos="-0.0055 -0.1635 -0.025" size="0.175 0.008 0.11" type="box"/>
+
+        <geom mesh="stoverim" pos="0.1015 0.1615 0.3095"/>
+        <geom mesh="stoverim" pos="-0.12 -0.06 0.3095"/>
+        <geom mesh="stoverim" pos="-0.1185 0.1615 0.3095"/>
+        <geom mesh="stoverim" pos="0.1035 -0.06 0.3095"/>
+
+        <geom mesh="oven" pos="-0.0575 0.1475 -0.49"/>
+
+        <geom class="oven_collision" pos="-0.0085 0.14 -0.0875" size="0.25 0.3125 0.405" type="box" mass="5"/>
+        <geom class="oven_collision" euler="1.57 0 0" pos="-0.1075 -0.18 -0.341" size="0.009 0.015" type="cylinder" mass=".2"/>
+        <geom class="oven_collision" euler="1.57 0 0" pos="0.092 -0.18 -0.341"  size="0.009 0.015" type="cylinder" mass=".2"/>
+        <geom class="oven_collision" euler="0 1.57 0" pos="-0.0075 -0.195 -0.341" size="0.011 0.14" type="cylinder" mass=".2"/>
+        <geom class="oven_collision" euler="1.57 0 0" pos="-0.1075 -0.18 0.127" size="0.009 0.015" type="cylinder" mass=".2"/>
+        <geom class="oven_collision" euler="1.57 0 0" pos="0.092 -0.18 0.127"  size="0.009 0.015" type="cylinder" mass=".2"/>
+        <geom class="oven_collision" euler="0 1.57 0" pos="-0.0075 -0.195 0.127" size="0.011 0.14" type="cylinder" mass=".2"/>
+
+        <body name="knob 1" euler="1.57 0 0" pos="-0.074 0.11 0.6215">
+            <joint name="knob1_joint" axis="0 0 1" type="hinge" limited="true" range="-1.57 0"/>
+            <geom type="box"      pos="0 0 0.019"           size="0.007 0.024 0.009"/>
+            <geom type="cylinder" pos="0 0 0.0065"          size="0.025 0.004"/>
+            <geom type="cylinder" pos="0 0.024 0.0185"      size="0.007 0.009" rgba="1 0 0 1"/>
+
+            <geom class="oven_collision" type="box"      pos="0 0 0.019"      size="0.007 0.024 0.009" mass=".01"/>
+            <geom class="oven_collision" type="cylinder" pos="0 0 0.0065"     size="0.025 0.004"      mass=".01"/>
+            <site type="sphere" name="knob1_site" pos="0 0 0.019" size="0.005" group="3" rgba="1 1 0 1"/>
+        </body>
+
+        <body name="Burner 1" pos="0.103 -0.0595 0.305">
+            <inertial pos="0 0 0" mass=".01" diaginertia="0.001 0.001 0.001"/>
+            <joint name="burner1_joint" axis="0 0 -1" type="slide" limited="true" range="-.009 0"/>
+            <geom material="oven_burner" size="0.05 0.005" type="cylinder"/>
+        </body>
+
+        <body name="knob 2" euler="1.57 0 0" pos="-0.1355 0.11 0.6215">
+            <joint name="knob2_joint" axis="0 0 1" type="hinge" limited="true" range="-1.57 0"/>
+            <geom type="box"      pos="0 0 0.019"           size="0.007 0.024 0.009"/>
+            <geom type="cylinder" pos="0 0 0.0065"          size="0.025 0.004"/>
+            <geom type="cylinder" pos="0 0.024 0.0185"      size="0.007 0.009" rgba="1 0 0 1"/>
+
+            <geom class="oven_collision" type="box"      pos="0 0 0.019"  size="0.007 0.024 0.009" mass=".01"/>
+            <geom class="oven_collision" type="cylinder" pos="0 0 0.0065" size="0.025 0.004"      mass=".01"/>
+            <site type="sphere" name="knob2_site" pos="0 0 0.019" size="0.005" group="3" rgba="0 0 1 1"/>
+        </body>
+
+        <body name="Burner 2" pos="-0.12 -0.0595 0.305">
+            <inertial pos="0 0 0" mass=".01" diaginertia="0.001 0.001 0.001"/>
+            <joint name="burner2_joint" axis="0 0 -1" type="slide" limited="true" stiffness="1" range="-.009 0"/>
+            <geom material="oven_burner" size="0.05 0.005" type="cylinder" group="1"/>
+        </body>
+
+        <body name="knob 3" euler="1.57 0 0" pos="-0.074 0.11 0.6785">
+            <joint name="knob3_joint" axis="0 0 1" type="hinge" limited="true" range="-1.57 0"/>
+            <geom type="box"      pos="0 0 0.019"           size="0.007 0.024 0.009"/>
+            <geom type="cylinder" pos="0 0 0.0065"          size="0.025 0.004"/>
+            <geom type="cylinder" pos="0 0.024 0.0185"      size="0.007 0.009" rgba="1 0 0 1"/>
+
+            <geom class="oven_collision" type="box"      pos="0 0 0.019"  size="0.007 0.024 0.009" mass=".01"/>
+            <geom class="oven_collision" type="cylinder" pos="0 0 0.0065" size="0.025 0.004"      mass=".01"/>
+            <site type="sphere" name="knob3_site" pos="0 0 0.019" size="0.005" group="3" rgba="0 1 0 1"/>
+        </body>
+
+        <body name="Burner 3" pos="0.102 0.161 0.305">
+            <inertial pos="0 0 0" mass=".01" diaginertia="0.001 0.001 0.001"/>
+            <joint name="burner3_joint" axis="0 0 -1" type="slide" limited="true" stiffness="1" range="-.009 0"/>
+            <geom material="oven_burner" size="0.05 0.005" type="cylinder" group="1"/>
+        </body>
+
+        <body name="knob 4" euler="1.57 0 0" pos="-0.1355 0.11 0.6785">
+            <joint name="knob4_joint" axis="0 0 1" type="hinge" limited="true" range="-1.57 0"/>
+            <geom type="box"      pos="0 0 0.019"           size="0.007 0.024 0.009"/>
+            <geom type="cylinder" pos="0 0 0.0065"          size="0.025 0.004"/>
+            <geom type="cylinder" pos="0 0.024 0.0185"      size="0.007 0.009" rgba="1 0 0 1"/>
+
+            <geom class="oven_collision" type="box"      pos="0 0 0.019"  size="0.007 0.024 0.009" mass=".01"/>
+            <geom class="oven_collision" type="cylinder" pos="0 0 0.0065" size="0.025 0.004"      mass=".01"/>
+            <site type="sphere" name="knob4_site" pos="0 0 0.019" size="0.005" group="3" rgba="1 0 0 1"/>
+        </body>
+
+        <body name="Burner 4" pos="-0.1185 0.161 0.305">
+            <inertial pos="0 0 0" mass=".01" diaginertia="0.001 0.001 0.001"/>
+            <joint name="burner4_joint" axis="0 0 -1" type="slide" limited="true" stiffness="1" range="-.009 0"/>
+            <geom material="oven_burner" size="0.05 0.005" type="cylinder" group="1"/>
+        </body>
+    </body>
+
+    <body name="hoodroot" pos="0.05 0.094 1.165" childclass="oven">
+        <geom material="oven_black" mesh="hood" pos="-0.05 -0.1448 -1.1645"/>
+        <geom class="oven_collision" pos="0 0.0365 -0.023" size="0.251 0.168 0.06" type="box" mass="2"/>
+
+        <body name="lightswitchbaseroot" pos="-0.2 -0.12365 -0.025" >
+            <geom mesh="lightswitchbase" pos="0 -0.00615 0" euler="-1.57 0 0"/>
+
+            <body name="lightswitchroot">
+                <inertial pos="-0.0023 0.175 0.00655" mass=".1" diaginertia="0.001 0.001 0.001"/>
+                <joint axis="0 0 1" limited="true" name="lightswitch_joint" frictionloss="1" range="-.7 0"/>
+
+                <geom pos="0.0126 -0.03 0" euler="-1.57 -.4 0" size="0.01 0.0175" type="capsule"/>
+                <geom class="oven_collision" euler="-1.57 -.4 0" pos="0.01315 -0.0325 0" size="0.0105 0.015" type="capsule" mass=".01"/>
+
+                <site type="sphere" name="light_site" pos="0.01575 -0.0375 0" size="0.005" group="3" rgba="1 0 0 1"/>
+            </body>
+        </body>
+
+        <body name="lightblock_hinge" pos="-0.0022 -0.15 -0.06805">
+            <inertial pos="-0.0023 0.175 0.00655" mass=".01" diaginertia="0.001 0.001 0.001"/>
+            <joint axis="0 0 -1" type="slide" limited="true" name="light_joint" frictionloss="1" range="-.05 0"/>
+            <geom material="oven_block" pos="-0.004 0.2 -0.005" size="0.2 0.15 0.0075" type="box"/>
+        </body>
+    </body>
+</mujocoinclude>

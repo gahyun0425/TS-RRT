@@ -1,0 +1,25 @@
+<mujocoinclude>
+  <body name="box_counter" childclass="counters">
+    <!-- 시각용 상판 (두께 0.024, 에어갭 0.005 유지) -->
+    <geom type="box" material="counter_marble"
+          pos="-0.4275 -0.254 0.987"
+          size="0.20372 0.15 0.012"/>
+
+    <!-- 시각용 캐비닛 (half-size z = 0.485, 중심 z = 0.485) -->
+    <geom type="box" material="counter_blue"
+          pos="-0.430 -0.250 0.485"
+          size="0.2024 0.15 0.485"/>
+
+    <!-- 충돌용 캐비닛 -->
+    <geom class="counter_collision" type="box"
+          pos="-0.430 -0.250 0.485"
+          size="0.2024 0.15 0.485"
+          mass="5"/>
+
+    <!-- 충돌용 상판 -->
+    <geom class="counter_collision" type="box"
+          pos="-0.4275 -0.254 0.987"
+          size="0.20372 0.15 0.012"
+          mass=".5"/>
+  </body>
+</mujocoinclude>

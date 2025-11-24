@@ -1,0 +1,7 @@
+<body name="table">
+  <geom name="table_top" type="box" pos="0.5 0 0.825" size="0.25 0.25 0.025" rgba="0.8 0.5 0.3 1"/>
+  <geom name="table_leg1" type="box" pos=" 0.725  0.225 0.4" size="0.025 0.025 0.4"/>
+  <geom name="table_leg2" type="box" pos=" 0.275  0.225 0.4" size="0.025 0.025 0.4"/>
+  <geom name="table_leg3" type="box" pos=" 0.725 -0.225 0.4" size="0.025 0.025 0.4"/>
+  <geom name="table_leg4" type="box" pos=" 0.275 -0.225 0.4" size="0.025 0.025 0.4"/>
+</body>
