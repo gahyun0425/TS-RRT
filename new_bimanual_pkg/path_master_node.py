@@ -34,6 +34,7 @@ from new_bimanual_pkg.ik.request import _ik_request_async
 class PathNode(Node):
     def __init__(self):
         super().__init__('path_node')
+        self._tsrrt_total_time = 0.0
 
         from rclpy.callback_groups import ReentrantCallbackGroup
         self.cbgroup = ReentrantCallbackGroup()
@@ -1394,6 +1395,7 @@ class PathNode(Node):
 
     # ★ ADD: 세그먼트 경로를 중복 없이 이어붙이기
     def _cbirrt_sequence_and_publish(self):
+        self._tsrrt_total_time = 0.0
         if hasattr(self, "_last_joint_state"):
             q_start = np.array(self._last_joint_state, float)
         else:
@@ -1510,6 +1512,10 @@ class PathNode(Node):
             for nm, q in zip(self.left_names, trajL.points[-1].positions): goal_map[nm]=float(q)
         if trajR and trajR.points:
             for nm, q in zip(self.right_names, trajR.points[-1].positions): goal_map[nm]=float(q)
+
+        self.get_logger().info(
+            f"[METRIC] TS-RRT total solve time (3-waypoints) = {self._tsrrt_total_time:.3f}s"
+        )
         
         self._arm_arrival(goal_map, mode='open')
         self.get_logger().info('Arrival action set: OPEN when goal is reached.')
@@ -1575,11 +1581,11 @@ class PathNode(Node):
             proj_spec=self._grasp_proj,
             group_name=self.group_name,
             state_dim=len(self.joint_names),
-            max_iter=20000,
-            step_size=0.03,
-            edge_check_res=0.02,
-            manifold_tol=5e-3,
-            tangent_radius=0.4,
+            max_iter=4000,
+            step_size=0.01,
+            edge_check_res=0.01,
+            manifold_tol=1e-3,
+            tangent_radius=0.2,
         )
 
         # 1) start는 제약 없이 (충돌/리밋만)
@@ -1599,7 +1605,14 @@ class PathNode(Node):
 
         # 4) 계획
         self.get_logger().info(f"[TS-RRT] {tag}: solving TS-RRT segment...")
+        t0 = time.time()  # 시작 시간 (wall-clock)
         ok, path = cplanner.solve(max_time=15.0)
+        dt = time.time() - t0  # 경로 생성에 걸린 시간
+        self.get_logger().info(
+            f"[METRIC] TS-RRT {tag} solve time = {dt:.3f}s (ok={ok})"
+        )
+        self._tsrrt_total_time += dt
+
         if not ok or path is None:
             self.get_logger().warn(f"[TS-RRT] {tag}: TS-RRT solve failed (no path)")
             return None, None

@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 import numpy as np
 
-from new_bimanual_pkg.constraint.projection import ConstraintProjec, projection_newton
+from new_bimanual_pkg.constraint.projection import ConstraintProjec, projection_newton, validity, check_edge
 from new_bimanual_pkg.constraint.constraint import is_state_valid
 
 def compute_projection_matrix(J: np.ndarray) -> np.ndarray:
@@ -132,6 +132,7 @@ class TangentSpaceRRT:
         self.manifold_tol = float(manifold_tol)
         self.tangent_radius = float(tangent_radius)
         self._constraints = None 
+        self._validity_cb = None
 
         # equality constraint projector (TS-RRT의 핵심)
         self.proj_spec = proj_spec
@@ -144,16 +145,22 @@ class TangentSpaceRRT:
         self.tangent_planes: List[TangentPlane] = []
 
     def set_constraints(self, constraints):
-        """MoveIt Constraints를 저장 (CBiRRT와 동일한 인터페이스)."""
         self._constraints = constraints
+        self._validity_cb = validity(
+            joint_names=self.joint_names,
+            lb=self.lb, ub=self.ub,
+            group_name=self.group_name,
+            constraints=None,
+            timeout=2.0,
+        )
 
     def is_valid(self, q: np.ndarray) -> bool:
-        """ inequality + (선택적) MoveIt Constraints 검사. """
+        # ✔ 여기서는 충돌/리밋만 (CBiRRT와 동일)
         return is_state_valid(
             q, self.joint_names, self.lb, self.ub,
             group_name=self.group_name,
             timeout=2.0,
-            constraints=self._constraints 
+            constraints=None,
         )
 
     def add_plane(self, plane: TangentPlane) -> int:
@@ -359,20 +366,30 @@ class TangentSpaceRRT:
     # 두 tree 연결 (Connect + ExtractPath + LazyProjection)
     def _edge_is_valid_ambient(self, qa: np.ndarray, qb: np.ndarray) -> bool:
         """
-        ambient 공간에서 선형 보간하며 inequality constraint만 체크.
-        TS-RRT에는 equality projection을 'lazy'하게 하기 위해 여기서는 projector 사용X.
+        ambient 공간에서 선형 보간하면서 validity_cb로 검사.
+        equality는 lazy projection 유지.
         """
-        dist = float(np.linalg.norm(qb - qa))
-        if dist < 1e-9:
-            return self.is_valid(qb)
+        if self._validity_cb is None:
+            # constraints가 없으면 그냥 충돌/리밋만
+            dist = float(np.linalg.norm(qb - qa))
+            if dist < 1e-9:
+                return self.is_valid(qb)
+            num = max(2, int(dist / self.edge_check_res))
+            for i in range(1, num + 1):
+                s = i / num
+                q = (1.0 - s) * qa + s * qb
+                if not self.is_valid(q):
+                    return False
+            return True
 
-        num = max(2, int(dist / self.edge_check_res))
-        for i in range(1, num + 1):
-            s = i / num
-            q = (1.0 - s) * qa + s * qb
-            if not self.is_valid(q):
-                return False
-        return True
+        # constraints가 있으면 CBiRRT와 같은 check_edge 사용
+        return check_edge(
+            q_from=qa, q_to=qb,
+            validity=self._validity_cb,
+            step=self.edge_check_res,
+            projector=self.proj_spec,
+            lb=self.lb, ub=self.ub,
+        )
     
     def _try_connect_to_other_tree(self,
                                    newly_extended_q: np.ndarray,
